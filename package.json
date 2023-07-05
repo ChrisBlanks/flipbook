@@ -1,0 +1,30 @@
+{
+  "name": "interactive_book",
+  "version": "1.0.0",
+  "description": "Interactive book app",
+  "main": "src/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "server": "npx vite"
+  },
+  "keywords": [
+    "book"
+  ],
+  "author": "ChrisBlanks",
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
+    "style-loader": "^3.3.3",
+    "vite": "^4.3.9",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "pdfjs": "^2.5.0"
+  }
+}
