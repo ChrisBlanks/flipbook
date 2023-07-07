@@ -9,7 +9,8 @@ module.exports = {
   }, 
   plugins: [
     new HtmlWebpackPlugin({
-        title: 'Interactive Book'
+        title: 'Interactive Book Reader',
+        template: 'src/index.html'
     })
   ],
   output: {
