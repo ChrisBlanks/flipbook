@@ -9,22 +9,13 @@
     <div>
       <div id="uploadDiv">
         <form id="uploadBookForm">
-          <label>Upload Book: </label>
-          <input type="file" id="book" name="bookUpload">
+          <label for="bookUpload">Upload Book: </label>
+          <input type="file" id="bookUpload" name="bookUpload" accept=".txt">
+          <button type="submit">Read</button>
         </form>
       </div>
       <div id="flipbook">
         <div id="bookTitle" class="hard"> Title </div> 
-        <!--
-        <div class="hard"></div>
-
-        <div> Page 1 </div>
-        <div> Page 2 </div>
-        <div> Page 3 </div>
-        <div> Page 4 </div>
-        <div class="hard"></div>
-        <div class="hard"></div>
-        -->
       </div>
       <div id="bookControlDiv">
         <button type="button" id="turnLeft">&larr;</button>

@@ -7,6 +7,35 @@ class BookReader {
     constructor(){
         this.bookText = null;
         this.loadedBook = null;
+
+        const turnLeftButton = document.getElementById('turnLeft');
+        const turnRightButton = document.getElementById('turnRight');
+
+        turnLeftButton.addEventListener('click',()=> {
+            if($("#flipbook").turn("is")){
+                $("#flipbook").turn("previous");
+            }
+
+        });
+
+        turnRightButton.addEventListener('click',()=> {
+            if($("#flipbook").turn("is")){
+                $("#flipbook").turn("next");
+            }
+
+        });
+    }
+
+    cleanBook(){
+        //destory reader if it's already been initialized & recreate flipbook container
+        if($("#flipbook").turn("is")){
+            $('#flipbook').turn("destroy").remove();
+            $( window ).unbind( 'keydown' );
+
+            $("<div id='flipbook'></div>").insertAfter("#uploadDiv");
+            $("<div id='bookTitle' class='hard'> Title </div>").appendTo("#flipbook");
+        }
+        
     }
 
     async loadBook(url){
@@ -18,12 +47,26 @@ class BookReader {
             this.loadedBook = new Book(this.bookText);
             this.loadedBook.printBookInfo();
 
+            this.cleanBook();
+
             this.updateBookReaderUI();
             this.initializeBookUI();
-            return data;
         } catch(err){
             console.error(err);
         }
+    }
+
+    createBookFromString(bookText){
+        this.bookText = bookText;
+
+        this.loadedBook = new Book(this.bookText);
+        this.loadedBook.printBookInfo();
+        
+        this.cleanBook();
+
+        this.updateBookReaderUI();
+        this.initializeBookUI();
+
     }
 
     updateBookReaderUI(){
@@ -34,15 +77,12 @@ class BookReader {
         let counter = 1;
         for(const chapter of this.loadedBook.chapters){
             let div = document.createElement('div');
-            //div.id= "Page" + counter;
 
             let chapterTitle= document.createElement('h1');
-            //chapterTitle.id= "ChapterTitle" + counter;
             chapterTitle.innerHTML = "Chapter " + chapter.number + " : " + chapter.name;
             
             let chapterText = document.createElement('p');
             chapterText.className='text';
-            //chapterText.id= "PageText" + counter;
 
             const choiceButtons = [];
             for(const choice of chapter.choices){
@@ -91,9 +131,8 @@ class BookReader {
         let bookEndSpan = document.createElement('span');
         bookEndSpan.className='hard';
         bookEndSpan.innerHTML="The End"
-        //var el = $(bookEndDiv);
+
         bookEndDiv.appendChild(bookEndSpan);
-        //$('#flipbook').turn("addPage",el);
         pageContainer.appendChild(bookEndDiv);
     }
 
@@ -114,23 +153,7 @@ class BookReader {
         $("#flipbook").bind("end", function(event, pageObject, turned){
             console.log("turn.end:" +pageObject.page);
           });
-        
-        const turnLeftButton = document.getElementById('turnLeft');
-        const turnRightButton = document.getElementById('turnRight');
 
-        turnLeftButton.addEventListener('click',()=> {
-            $("#flipbook").turn("previous");
-        });
-
-        turnRightButton.addEventListener('click',()=> {
-            $("#flipbook").turn("next");
-        });
-
-        /*
-        window.addEventListener("resize", () => {
-            $("#flipbook").turn("size", window.innerWidth, 300);
-        })
-        */
     }
 
     async printUrlContent(url){
