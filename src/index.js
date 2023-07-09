@@ -7,8 +7,9 @@ function importAll(r){
 }
 
 function main(){
+
     const books = importAll(require.context("../assets/books",false, /\.(txt)$/));
-    
+
     const reader = new BookReader();
     reader.loadBook("/assets/books/book.txt");
 }

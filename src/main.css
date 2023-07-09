@@ -1,27 +1,37 @@
 body{
-    /*background-color: black;*/
     overflow:hidden;
 }
 
-#flipbook{
-    width: 800px;
-    height: 400px;
+#bookControlDiv{
+    display:flex;
+    width: auto;
+}
+#bookControlDiv button {
+    width: 50%;
 }
 
-/*
-#flipbook .turn-page{
-    background-color: #ccc;
+#flipbook{
+    /*
+    width: 400px;
+    height: 300px;
+    */
+    border: solid black;
 }
-*/
 
 #flipbook .page{
+    /*
     width:400px;
     height:300px;
+    */
     background-color:white;
+    /*
     line-height:300px;
-    font-size:20px;
+    */
+    /*font-size:10px;*/
+    word-wrap: break-word;
     text-align:center;
 }
+
 
 #flipbook .page-wrapper{
     -webkit-perspective:2000px;
