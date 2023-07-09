@@ -26,8 +26,6 @@ class BookReader {
         }
     }
 
-    //To-Do: Even pages not displaying properly. Need fix
-    //To-Do: Pages seem to be out of order when flipping throught them? Need fix
     updateBookReaderUI(){
         const bookTitle = this.loadedBook.getTitle();
         document.getElementById('bookTitle').innerHTML = bookTitle;
@@ -46,21 +44,25 @@ class BookReader {
             chapterText.className='text';
             //chapterText.id= "PageText" + counter;
 
-            //To-Do: Can't click buttons?
-            let choice1Button = document.createElement('button');
-            let choice2Button = document.createElement('button');
-            choice1Button.type='button';
-            choice2Button.type='button';
-            choice1Button.innerHTML='Go to chapter X';
-            choice2Button.innerHTML='Go to chapter Y';
-
-            choice1Button.addEventListener('click',()=> {
-                $("#flipbook").turn("previous");
-            });
+            const choiceButtons = [];
+            for(const choice of chapter.choices){
+                let choiceButton = document.createElement('button');
+                choiceButton.type='button';
+                choiceButton.innerHTML=choice.jumpText;
     
-            choice2Button.addEventListener('click',()=> {
-                $("#flipbook").turn("next");
-            });
+                choiceButton.addEventListener('click',()=> {
+                    const nextPageNum = parseInt(choice.jumpNumber)+1; //book cover counts as page
+                    if ($("#flipbook").turn("hasPage", nextPageNum)) {
+                        $("#flipbook").turn("page",nextPageNum); 
+                    } else{
+                        const page = nextPageNum - 1;
+                        alert("Page "+ page +" is missing");
+                    }
+                    
+                });
+
+                choiceButtons.push(choiceButton);
+            } 
 
             let pageNumberDiv = document.createElement('div');
             let pageNumberText = document.createElement('span');
@@ -73,12 +75,12 @@ class BookReader {
 
             div.appendChild(chapterTitle);
             div.appendChild(chapterText);
-            div.appendChild(choice1Button);
-            div.appendChild(choice2Button);
+            for(const button of choiceButtons){
+                div.appendChild(button);
+            }
+            
             pageNumberDiv.appendChild(pageNumberText)
             div.appendChild(pageNumberDiv);
-            //var jqueryEl = $(div);
-            //$('#flipbook').turn("addPage",jqueryEl);
             pageContainer.appendChild(div);
             counter += 1;
         }
@@ -88,6 +90,7 @@ class BookReader {
         bookEndDiv.id= "bookEndDiv";
         let bookEndSpan = document.createElement('span');
         bookEndSpan.className='hard';
+        bookEndSpan.innerHTML="The End"
         //var el = $(bookEndDiv);
         bookEndDiv.appendChild(bookEndSpan);
         //$('#flipbook').turn("addPage",el);

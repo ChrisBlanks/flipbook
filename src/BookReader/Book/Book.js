@@ -29,19 +29,29 @@ class Book {
         let chapterName;
         let chapterNumber;
         let chapterText;
+        let chapterChoices = [];
         for(const line of bookContentArray){
             
             if(line.startsWith("Chapter")){ //if line begins with 'Chapter'
                 if(chapterText){
                     //build chapter object before processing next chapter
-                    bookChapters.push( {name: chapterName, number: chapterNumber, text: chapterText});
+                    //create copy of chapter choices via mapping w/ identity function
+                    bookChapters.push( {name: chapterName, number: chapterNumber, text: chapterText, choices: chapterChoices.map((choice) => choice)});
                 }
 
                 //format= 'Chapter #: Chapter name'
                 chapterName = line.split(':')[1];
                 chapterNumber = line.split(':')[0].split(' ')[1];
                 chapterText = '';
-            } else if(line){ //if line
+                chapterChoices = [];
+            } else if(line){ //if line not empty
+                if(line.includes("Chapter")){ // if Chapter mentioned in line, parse for chapter jump
+                    const chapterIndex = line.indexOf("Chapter");
+                    const chapterJumpText = line.substr(chapterIndex).replace('.','');
+                    const chapterNum = chapterJumpText.split(" ")[1];
+                    chapterChoices.push({jumpText: chapterJumpText, jumpNumber :chapterNum});
+                } 
+                
                 chapterText += line;
             }
         }
@@ -100,6 +110,20 @@ class Book {
 
     getCurrentChapterText(){
         return this.getChapterText(this.currentChapterNumber);
+    }
+
+
+    getChapterChoices(chapterNumber){
+        if(chapterNumber <= this.numberOfChapters){
+            const chapter = this.chapters[chapterNumber];
+            return chapter.choices;
+        } else {
+            return null;
+        }
+    }
+
+    getCurrentChapterChoices(){
+        return this.getChapterChoices(this.currentChapterNumber);
     }
 
     printBookInfo(){
