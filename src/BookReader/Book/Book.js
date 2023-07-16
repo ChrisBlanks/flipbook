@@ -50,9 +50,13 @@ class Book {
                     const chapterJumpText = line.substr(chapterIndex).replace('.','');
                     const chapterNum = chapterJumpText.split(" ")[1];
                     chapterChoices.push({jumpText: chapterJumpText, jumpNumber :chapterNum});
-                } 
+
+                    chapterText += "<br>"+line;
+                } else{
+                    chapterText += line;
+                }
                 
-                chapterText += line;
+                
             }
         }
 

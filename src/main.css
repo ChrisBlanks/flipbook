@@ -5,9 +5,6 @@ body{
 #readerContainer {
 
 }
-.dropdown-menu{
-    width: max-content;
-}
 
 #bookControlDiv{
     display:flex;
@@ -29,6 +26,7 @@ body{
     /*
     width:400px;
     height:300px;
+    text-align:center;
     */
     background-color:white;
     /*
@@ -36,9 +34,17 @@ body{
     */
     /*font-size:10px;*/
     word-wrap: break-word;
-    text-align:center;
+    
 }
 
+.chapterTitle{
+    text-align: center;
+}
+
+.chapterText{
+    text-align: left ;
+    text-indent: 1rem;
+}
 
 #flipbook .page-wrapper{
     -webkit-perspective:2000px;

@@ -32,8 +32,15 @@ class BookReader {
             $('#flipbook').turn("destroy").remove();
             $( window ).unbind( 'keydown' );
 
-            $("<div id='flipbook'></div>").insertAfter("#uploadDiv");
-            $("<div id='bookTitle' class='hard'> Title </div>").appendTo("#flipbook");
+            $('#readerContainer').prepend(`
+                    <div id="flipbook">
+                    <div id="pageContainer">
+                        <div id="pageContent" class="d-flex justify-content-center align-items-center">
+                            <h1 id="titleText" class="text-center">Title</h1>
+                        </div>
+                    </div> 
+                    </div>`
+            );
         }
         
     }
@@ -71,24 +78,29 @@ class BookReader {
 
     updateBookReaderUI(){
         const bookTitle = this.loadedBook.getTitle();
-        document.getElementById('bookTitle').innerHTML = bookTitle;
+        document.getElementById('titleText').innerHTML = bookTitle;
 
         const pageContainer = document.getElementById('flipbook');
         let counter = 1;
         for(const chapter of this.loadedBook.chapters){
             let div = document.createElement('div');
+            let flexDiv = document.createElement('div');
+            flexDiv.className= "d-flex flex-column justify-content-center";
 
-            let chapterTitle= document.createElement('h1');
+            let chapterTitle= document.createElement('h3');
             chapterTitle.innerHTML = "Chapter " + chapter.number + " : " + chapter.name;
-            
+            chapterTitle.className='chapterTitle';
+
             let chapterText = document.createElement('p');
-            chapterText.className='text';
+            chapterText.className='chapterText';
+            chapterText.innerHTML= chapter.text; 
 
             const choiceButtons = [];
             for(const choice of chapter.choices){
                 let choiceButton = document.createElement('button');
                 choiceButton.type='button';
                 choiceButton.innerHTML=choice.jumpText;
+                choiceButton.className='btn btn-dark';
     
                 choiceButton.addEventListener('click',()=> {
                     const nextPageNum = parseInt(choice.jumpNumber)+1; //book cover counts as page
@@ -110,17 +122,20 @@ class BookReader {
             pageNumberText.innerHTML = "" + counter;
 
             //To-Do: Need to figure out how to fit text on each page (wrapping option?)
-            // Does using "addPage" option in .turn make a difference in displaying?
-            chapterText.innerHTML= chapter.text; 
-
-            div.appendChild(chapterTitle);
-            div.appendChild(chapterText);
-            for(const button of choiceButtons){
-                div.appendChild(button);
-            }
+            flexDiv.appendChild(chapterTitle);
+            flexDiv.appendChild(chapterText);
             
-            pageNumberDiv.appendChild(pageNumberText)
-            div.appendChild(pageNumberDiv);
+            let buttonDiv = document.createElement('div');
+            buttonDiv.className="btn-group";
+            for(const button of choiceButtons){
+                buttonDiv.appendChild(button);
+            }
+            flexDiv.appendChild(buttonDiv);
+            
+            //pageNumberDiv.appendChild(pageNumberText)
+            //flexDiv.appendChild(pageNumberDiv);
+
+            div.appendChild(flexDiv);
             pageContainer.appendChild(div);
             counter += 1;
         }
