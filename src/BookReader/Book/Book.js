@@ -30,19 +30,28 @@ class Book {
         let chapterNumber;
         let chapterText;
         let chapterChoices = [];
+        let choicesText="";
         for(const line of bookContentArray){
             
             if(line.startsWith("Chapter")){ //if line begins with 'Chapter'
                 if(chapterText){
                     //build chapter object before processing next chapter
                     //create copy of chapter choices via mapping w/ identity function
-                    bookChapters.push( {name: chapterName, number: chapterNumber, text: chapterText, choices: chapterChoices.map((choice) => choice)});
+                    bookChapters.push( 
+                        { 
+                            name: chapterName,
+                            number: chapterNumber,
+                            text: chapterText,
+                            choices: chapterChoices.map((choice) => choice),
+                            choicesText: choicesText
+                        });
                 }
 
                 //format= 'Chapter #: Chapter name'
                 chapterName = line.split(':')[1];
                 chapterNumber = line.split(':')[0].split(' ')[1];
                 chapterText = '';
+                choicesText='';
                 chapterChoices = [];
             } else if(line){ //if line not empty
                 if(line.includes("Chapter")){ // if Chapter mentioned in line, parse for chapter jump
@@ -50,8 +59,8 @@ class Book {
                     const chapterJumpText = line.substr(chapterIndex).replace('.','');
                     const chapterNum = chapterJumpText.split(" ")[1];
                     chapterChoices.push({jumpText: chapterJumpText, jumpNumber :chapterNum});
-
-                    chapterText += "<br>"+line;
+                    choicesText += line +"<br>";
+                    //chapterText += "<br>"+line;
                 } else{
                     chapterText += line;
                 }

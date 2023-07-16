@@ -116,14 +116,19 @@ class BookReader {
                 choiceButtons.push(choiceButton);
             } 
 
-            let pageNumberDiv = document.createElement('div');
-            let pageNumberText = document.createElement('span');
-            pageNumberText.className='page-number';
-            pageNumberText.innerHTML = "" + counter;
+            let choicesText = document.createElement('p');
+            choicesText.className='choicesText';
+            choicesText.innerHTML= chapter.choicesText; 
+
+            //let pageNumberDiv = document.createElement('div');
+            //let pageNumberText = document.createElement('span');
+            //pageNumberText.className='page-number';
+            //pageNumberText.innerHTML = "" + counter;
 
             //To-Do: Need to figure out how to fit text on each page (wrapping option?)
             flexDiv.appendChild(chapterTitle);
             flexDiv.appendChild(chapterText);
+            flexDiv.appendChild(choicesText);
             
             let buttonDiv = document.createElement('div');
             buttonDiv.className="btn-group";

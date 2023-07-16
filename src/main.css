@@ -46,6 +46,10 @@ body{
     text-indent: 1rem;
 }
 
+.choicesText{
+    text-align: left ;
+}
+
 #flipbook .page-wrapper{
     -webkit-perspective:2000px;
     -moz-perspective:2000px;
