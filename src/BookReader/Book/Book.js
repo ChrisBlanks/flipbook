@@ -14,11 +14,6 @@ class Book {
     }
 
     parseText(textOfBook){
-        //To-Do: Parse book text and extract metainfo
-        //To-Do: Build up data structure for book text based on chapters and decisions
-        //To-Do: Calculate number of pages based on how much text can fit in size of book page
-        // Or based on number of pages defined in book text
-
         let textSeparated = textOfBook.split(/\r?\n|\r|\n/g);
 
         //format= 'Title: Title name here'

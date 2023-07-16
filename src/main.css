@@ -2,10 +2,6 @@ body{
     overflow:hidden;
 }
 
-#readerContainer {
-    
-}
-
 #bookControlDiv{
     display:flex;
     width: auto;
@@ -15,27 +11,12 @@ body{
 }
 
 #flipbook{
-    /*
-    width: 400px;
-    height: 300px;
-    
-    border: solid black;*/
     width:auto;
 }
 
 #flipbook .page{
-    /*
-    width:400px;
-    height:300px;
-    text-align:center;
-    */
     background-color:white;
-    /*
-    line-height:300px;
-    */
-    /*font-size:10px;*/
-    word-wrap: break-word;
-    
+    word-wrap: break-word;   
 }
 
 .chapterTitle{
