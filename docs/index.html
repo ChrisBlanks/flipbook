@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Interactive Book</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="index.bundle.js"></script></head>
+  <body>
+    <!--To-Do: Make responsive-->
+    <div>
+      <div id="uploadDiv">
+        <form id="uploadBookForm">
+          <label for="bookUpload">Upload Book: </label>
+          <input type="file" id="bookUpload" name="bookUpload" accept=".txt">
+          <button type="submit">Read</button>
+        </form>
+      </div>
+      <div id="flipbook">
+        <div id="bookTitle" class="hard"> Title </div> 
+      </div>
+      <div id="bookControlDiv">
+        <button type="button" id="turnLeft">&larr;</button>
+        <button type="button" id="turnRight">&rarr;</button>
+      </div>
+
+    </div>
+
+    
+  </body>
+</html>
