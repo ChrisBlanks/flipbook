@@ -31,16 +31,15 @@ class BookReader {
         if($("#flipbook").turn("is")){
             $('#flipbook').turn("destroy").remove();
             $( window ).unbind( 'keydown' );
-
-            $('#readerContainer').prepend(`
-                    <div id="flipbook">
+            $(`
+                <div id="flipbook">
                     <div id="pageContainer">
                         <div id="pageContent" class="d-flex justify-content-center align-items-center">
                             <h1 id="titleText" class="text-center">Title</h1>
                         </div>
                     </div> 
-                    </div>`
-            );
+                </div>`
+            ).insertAfter('#turnLeft');
         }
         
     }
@@ -85,7 +84,7 @@ class BookReader {
         for(const chapter of this.loadedBook.chapters){
             let div = document.createElement('div');
             let flexDiv = document.createElement('div');
-            flexDiv.className= "d-flex flex-column justify-content-center";
+            flexDiv.className= "d-flex flex-column justify-content-center p-1";
 
             let chapterTitle= document.createElement('h3');
             chapterTitle.innerHTML = "Chapter " + chapter.number + " : " + chapter.name;
@@ -125,13 +124,13 @@ class BookReader {
             //pageNumberText.className='page-number';
             //pageNumberText.innerHTML = "" + counter;
 
-            //To-Do: Need to figure out how to fit text on each page (wrapping option?)
             flexDiv.appendChild(chapterTitle);
             flexDiv.appendChild(chapterText);
             flexDiv.appendChild(choicesText);
             
             let buttonDiv = document.createElement('div');
             buttonDiv.className="btn-group";
+            //buttonDiv.className="btn-group align-self-center";
             for(const button of choiceButtons){
                 buttonDiv.appendChild(button);
             }
@@ -145,7 +144,7 @@ class BookReader {
             counter += 1;
         }
 
-        //<div class="hard"></div>
+        //create hard cover for the ending page
         let bookEndDiv = document.createElement('div');
         bookEndDiv.id= "bookEndDiv";
         let bookEndSpan = document.createElement('span');
@@ -158,9 +157,8 @@ class BookReader {
 
     initializeBookUI(){
         $('#flipbook').turn({
-            //width: window.innerWidth,
-            width: 400,
-            height: 300,
+            width: 4*window.screen.width/5,
+            height: 4*window.screen.height/5,
             autocenter: true,
             display: "single",
             page: 1
@@ -174,6 +172,13 @@ class BookReader {
             console.log("turn.end:" +pageObject.page);
           });
 
+        $(window).on('resize', () =>{
+            $("#flipbook").turn("size", 4*window.screen.width/5, 4*window.screen.height/5);
+        });
+
+        //turn to page 1
+        $("#flipbook").turn("page", 10);
+        $("#flipbook").turn("page", 1);
     }
 
     async printUrlContent(url){

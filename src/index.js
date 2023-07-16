@@ -34,7 +34,9 @@ function setupBookUploader(bookReader){
                 bookText.then((text) => {
                     console.log(text);
                     bookReader.createBookFromString(text);
+                    document.getElementById('readerContainer').style.display='flex';
                 });
+                
             } 
     
         });

@@ -3,7 +3,7 @@ body{
 }
 
 #readerContainer {
-
+    
 }
 
 #bookControlDiv{
@@ -18,8 +18,9 @@ body{
     /*
     width: 400px;
     height: 300px;
-    */
-    border: solid black;
+    
+    border: solid black;*/
+    width:auto;
 }
 
 #flipbook .page{
@@ -42,7 +43,7 @@ body{
 }
 
 .chapterText{
-    text-align: left ;
+    text-align: left;
     text-indent: 1rem;
 }
 
