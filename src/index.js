@@ -1,6 +1,7 @@
 import { BookReader } from './BookReader/BookReader';
 
 import './main.css';
+import '../favicon.ico';
 import $ from "jquery";
 
 function importAll(r){
@@ -10,7 +11,7 @@ function importAll(r){
 function main(){
 
     const books = importAll(require.context("../assets/books",false, /\.(txt)$/));
-
+    
     const reader = new BookReader();
     const bookText = setupBookUploader(reader);
     //reader.loadBook("/assets/books/book.txt");

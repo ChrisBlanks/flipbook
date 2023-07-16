@@ -28,6 +28,13 @@ module.exports = {
         {
             test: /\.(png|svg|jpg|jpeg|gif|txt)$/i,
             type: 'asset/resource'           
+        },
+        {
+            test: /\.(ico)$/i,
+            type: 'asset/resource',
+            generator : {
+              filename: "[name][ext]"
+            }    
         }
     ]
   }
