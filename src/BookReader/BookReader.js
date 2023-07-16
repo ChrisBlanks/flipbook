@@ -147,8 +147,8 @@ class BookReader {
         //create hard cover for the ending page
         let bookEndDiv = document.createElement('div');
         bookEndDiv.id= "bookEndDiv";
-        let bookEndSpan = document.createElement('span');
-        bookEndSpan.className='hard';
+        let bookEndSpan = document.createElement('h1');
+        bookEndSpan.className='text-center';
         bookEndSpan.innerHTML="The End"
 
         bookEndDiv.appendChild(bookEndSpan);

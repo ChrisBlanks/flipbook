@@ -19,3 +19,23 @@ use `npx vite build` to build prod version and run in server
 # Special Notes
 The book text must be in the following format:
 
+    Title : [Book Title]
+
+    Chapter [#]: [Chapter title]
+    [Chapter text]
+
+    [Chapter choices]
+    [Chapter choices]
+
+    .
+    .
+    .
+
+    Chapter [Last Chapter #]: [Last Chapter title]
+    [Chapter text]
+
+    [Chapter choices]
+    [Chapter choices]
+
+
+A "The End" page will be generated as the last page of the book.
